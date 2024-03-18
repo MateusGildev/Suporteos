@@ -2,14 +2,15 @@ package com.curso.Suporteos.Entity;
 
 import com.curso.Suporteos.Services.ServiceOrder;
 import com.curso.Suporteos.domains.enums.PersonType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Users extends Person{
+@Entity
+public class Users extends Person {
     @OneToMany(mappedBy = "id_user")
     private List<ServiceOrder> serviceOrders = new ArrayList<>();
 

@@ -1,11 +1,13 @@
 package com.curso.Suporteos.Services;
 
 import com.curso.Suporteos.Entity.Technician;
+import com.curso.Suporteos.Entity.Users;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,6 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@Service
 public class ServiceOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,14 +32,14 @@ public class ServiceOrder {
     private OrderPriority orderPriority;
     private OrderStatus orderStatus;
     @ManyToOne
-    @JoinColumn(name = id_technician)
+    @JoinColumn(name = "id_technician")
     private Technician technician;
 
     @ManyToOne
-    @JoinColumn(name = id_user)
-    private User user;
+    @JoinColumn(name = "id_user")
+    private Users user;
 
-    public ServiceOrder(UUID id, String titleOS, String description, OrderPriority orderPriority, OrderStatus orderStatus, Technician technician, User user) {
+    public ServiceOrder(UUID id, String titleOS, String description, OrderPriority orderPriority, OrderStatus orderStatus, Technician technician, Users user) {
         this.id = id;
         this.titleOS = titleOS;
         this.description = description;
