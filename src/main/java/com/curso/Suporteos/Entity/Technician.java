@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 @Entity
 public class Technician extends Person{
-    @OneToMany(mappedBy = "id_technician")
+    @OneToMany(mappedBy = "technician")
     private List<ServiceOrder> serviceOrders = new ArrayList<>();
 
     public Technician(UUID id, String firstName, String lastName, String cpf, String email, String password) {

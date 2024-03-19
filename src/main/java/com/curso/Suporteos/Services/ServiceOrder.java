@@ -2,6 +2,8 @@ package com.curso.Suporteos.Services;
 
 import com.curso.Suporteos.Entity.Technician;
 import com.curso.Suporteos.Entity.Users;
+import com.curso.Suporteos.domains.enums.OrderPriority;
+import com.curso.Suporteos.domains.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +18,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Service
+@Entity
+@Table(name = "tb_serviceOrder")
 public class ServiceOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,6 +27,7 @@ public class ServiceOrder {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate starDate = LocalDate.now();
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
 
@@ -31,6 +35,7 @@ public class ServiceOrder {
     private String description;
     private OrderPriority orderPriority;
     private OrderStatus orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "id_technician")
     private Technician technician;
@@ -50,15 +55,27 @@ public class ServiceOrder {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ServiceOrder that = (ServiceOrder) o;
-        return Objects.equals(id, that.id);
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ServiceOrder other = (ServiceOrder) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 }

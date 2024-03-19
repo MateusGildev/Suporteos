@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 public class Users extends Person {
-    @OneToMany(mappedBy = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<ServiceOrder> serviceOrders = new ArrayList<>();
 
     public Users(UUID id, String firstName, String lastName, String cpf, String email, String password) {
