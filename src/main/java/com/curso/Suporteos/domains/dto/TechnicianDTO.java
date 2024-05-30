@@ -3,6 +3,8 @@ package com.curso.Suporteos.domains.dto;
 import com.curso.Suporteos.Entity.Technician;
 import com.curso.Suporteos.domains.enums.PersonType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,10 +15,22 @@ import java.util.stream.Collectors;
 public class TechnicianDTO {
 
     protected UUID id;
+    @NotNull(message = "O campo nome nao deve ser nulo")
+    @NotBlank(message = "O campo nome nao pode ter espaços vazios")
     protected String firstName;
+    @NotNull(message = "O campo sobrenome nao deve ser nulo")
+    @NotBlank(message = "O campo sobrenome nao pode ter espaços vazios")
     protected String lastName;
+
+    @NotNull(message = "O campo cpf nao deve ser nulo")
+    @NotBlank(message = "O campo cpf nao pode ter espaços vazios")
     protected String cpf;
+
+    @NotNull(message = "O campo email nao deve ser nulo")
+    @NotBlank(message = "O campo email nao pode ter espaços vazios")
     protected String email;
+    @NotNull(message = "O campo senha nao deve ser nulo")
+    @NotBlank(message = "O campo senha nao pode ter espaços vazios")
     protected String password;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
